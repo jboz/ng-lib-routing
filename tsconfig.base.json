@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@myorg/results-lib": ["libs/results/src/index.ts"],
-      "@myorg/risk-analyze-lib": ["libs/risk-analyze/src/index.ts"]
+      "@myorg/results": ["libs/results/src/index.ts"],
+      "@myorg/risk-analyze": ["libs/risk-analyze/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

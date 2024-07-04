@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { addRiskAnalyse } from './risk-analyze.state';
+import { patchState } from '@ngrx/signals';
+import { addRiskAnalyze, riskAnalyzeState } from './risk-analyze.state';
 
 @Component({
   selector: 'lib-risk-analyze-main',
@@ -31,6 +32,6 @@ export class MainComponent {
   partnerIdentifier = input.required<string>();
 
   constructor() {
-    effect(() => addRiskAnalyse(this.partnerIdentifier()));
+    effect(() => patchState(riskAnalyzeState, addRiskAnalyze(this.partnerIdentifier())));
   }
 }

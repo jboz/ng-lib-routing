@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed } from '@angular/core';
-import { currentAnalyse as currentAnalyze } from './risk-analyze.state';
+import { currentAnalyze } from './risk-analyze.state';
 
 @Component({
   selector: 'lib-risk-analyze-steps',

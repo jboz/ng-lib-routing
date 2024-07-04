@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { processState } from './core/process.store';
 
 @Component({
   standalone: true,
@@ -10,8 +11,7 @@ import { RouterModule } from '@angular/router';
     <div id="container">
       <nav>
         <a routerLink="/initalize">Initialize</a>
-        <a routerLink="/analyze">Manual analyze</a>
-        <a routerLink="/results">Results</a>
+        <a routerLink="/analyzes">Analyzes</a>
       </nav>
       <main>
         <router-outlet></router-outlet>
@@ -37,4 +37,6 @@ import { RouterModule } from '@angular/router';
     }
   `
 })
-export class AppComponent {}
+export class AppComponent {
+  partnerIdentifier = processState.partnerIdentifier;
+}

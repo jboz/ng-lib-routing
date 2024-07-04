@@ -6,16 +6,12 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./features/initialize.component').then(c => c.InitializeComponent)
   },
   {
-    path: 'analyze',
-    loadComponent: () => import('./features/analyze.component').then(c => c.analyzeComponent)
-  },
-  {
     path: ':partnerIdentifier/risk-analyze',
-    loadChildren: () => import('@myorg/risk-analyze-lib').then(m => m.riskAnalyzeRoutes)
+    loadChildren: () => import('@myorg/risk-analyze').then(m => m.riskAnalyzeRoutes)
   },
   {
-    path: ':partnerIdentifier/results',
-    loadComponent: () => import('./features/results.component').then(c => c.AnalyzeResultsComponent)
+    path: 'analyzes',
+    loadComponent: () => import('./features/analyzes.component').then(c => c.AnalyzesComponent)
   },
   {
     path: '',
