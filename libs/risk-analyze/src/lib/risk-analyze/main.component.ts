@@ -1,37 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { patchState } from '@ngrx/signals';
-import { addRiskAnalyze, riskAnalyzeState } from './risk-analyze.state';
+import { RiskAnalyzeStore } from './risk-analyze.store';
 
 @Component({
   selector: 'lib-risk-analyze-main',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <h2>Risk analyzing...</h2>
-    <main>
-      <div>
-        <label>Identifier:</label><span>{{ partnerIdentifier() }}</span>
-        <router-outlet></router-outlet>
-      </div>
-    </main>
+    <h2>Risk analysis {{ partnerIdentifier() }}</h2>
+    <router-outlet></router-outlet>
   `,
   styles: `
-    main {
+    :host {
       display: flex;
-      gap: 1em;
+      flex-direction: column;
     }
-
-    label {
-      font-weight: bold;
-    }
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent {
+  readonly #store = inject(RiskAnalyzeStore);
   partnerIdentifier = input.required<string>();
 
   constructor() {
-    effect(() => patchState(riskAnalyzeState, addRiskAnalyze(this.partnerIdentifier())));
+    effect(() => this.#store.addRiskAnalyze(this.partnerIdentifier()), { allowSignalWrites: true });
   }
 }

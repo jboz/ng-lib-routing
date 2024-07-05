@@ -10,8 +10,8 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('@myorg/risk-analyze').then(m => m.riskAnalyzeRoutes)
   },
   {
-    path: 'analyzes',
-    loadComponent: () => import('./features/analyzes.component').then(c => c.AnalyzesComponent)
+    path: 'risk-analyze/documenation',
+    loadComponent: () => import('./features/risk-analyse-doc.component').then(c => c.DocumentationComponent)
   },
   {
     path: '',

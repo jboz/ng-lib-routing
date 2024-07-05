@@ -1,19 +1,22 @@
-import { PartialStateUpdater, signalState } from '@ngrx/signals';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
 type ProcessState = {
   partnerIdentifier: string;
-  isAnalysing: boolean;
-  results: string[];
 };
 
 const initialState: ProcessState = {
-  partnerIdentifier: '',
-  isAnalysing: false,
-  results: []
+  partnerIdentifier: ''
 };
 
-export const processState = signalState<ProcessState>(initialState);
-
-export const startProcess = (partnerIdentifier: string): PartialStateUpdater<ProcessState> => {
-  return state => (state.partnerIdentifier === partnerIdentifier ? state : { ...state, partnerIdentifier, isAnalysing: true, results: [] });
-};
+export const ProcessStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialState),
+  withMethods((store, router = inject(Router)) => ({
+    startProcess(partnerIdentifier: string) {
+      patchState(store, state => ({ ...state, partnerIdentifier }));
+      router.navigate(['/', partnerIdentifier, 'risk-analyze']);
+    }
+  }))
+);

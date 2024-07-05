@@ -1,17 +1,13 @@
-import { Component, computed } from '@angular/core';
-import { Risk, riskAnalyzeState } from './risk-analyze/risk-analyze.state';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'lib-risk-analyze-results',
-  standalone: true,
+  selector: 'lib-risk-analyze',
   template: `
-    <ul>
-      @for (analyze of analyzes(); track analyze) {
-      <li>{{ analyze.partnerIdentifier }} - {{ analyze.status }}</li>
-      }
-    </ul>
-  `
+    <h2>Test</h2>
+    <router-outlet></router-outlet>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RiskAnalyzeResultsComponent {
-  analyzes = computed<Risk[]>(() => Object.values(riskAnalyzeState.analyzes).filter(a => !!a.partnerIdentifier));
+export class RiskAnalyzeComponent {
+  partnerIdentifier = input.required<string>();
 }

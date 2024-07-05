@@ -1,17 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed } from '@angular/core';
-import { currentAnalyze } from './risk-analyze.state';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { RiskAnalyzeStore } from './risk-analyze.store';
 
 @Component({
   selector: 'lib-risk-analyze-steps',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, JsonPipe, RouterLink],
   template: `
-    <p>Analyse steps in progress...</p>
-    <p>{{ data() }}</p>
+    <h3>Analyse steps in progress...</h3>
+    <p>{{ active() | json }}</p>
+    <p><button [routerLink]="['../ongoing']">show ongoing analyses</button></p>
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepsComponent {
-  data = computed(() => JSON.stringify(currentAnalyze()));
+  readonly #store = inject(RiskAnalyzeStore);
+  active = this.#store.activeAnalysis;
 }
