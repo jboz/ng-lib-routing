@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve pos"
+    "start": "nx serve pos",
+    "build": "nx build pos --prod"
   },
   "private": true,
   "dependencies": {

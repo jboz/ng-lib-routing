@@ -13,6 +13,7 @@ import { ProcessStore } from './core/process.store';
       <nav>
         <a routerLink="/initalize" routerLinkActive="active">Initialize</a>
         <a [routerLink]="partnerIdentifier() + '/risk-analyze'" routerLinkActive="active">Risk analyze</a>
+        <a routerLink="/risk-analyze" routerLinkActive="active">Risk analyze with resolver</a>
         <a routerLink="/risk-analyze/documenation" routerLinkActive="active">Documentation</a>
       </nav>
       <main>
